@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙岗区滑坡检测 - 地质灾害易发性分析</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">龙岗区滑坡检测</div>
+            <ul class="nav-menu">
+                <li><a href="#overview">项目概述</a></li>
+                <li><a href="#factors">孕灾因子</a></li>
+                <li><a href="#analysis">层次分析</a></li>
+                <li><a href="#network">网络分析</a></li>
+                <li><a href="#conclusion">结论</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">基于ArcGIS的龙岗区滑坡地质灾害易发敏感性分析</h1>
+            <p class="hero-subtitle">郝思敏 魏永琦 郝鑫 | 人文社科学部 资源与环境</p>
+        </div>
+    </section>
+
+    <!-- 项目概述 -->
+    <section id="overview" class="section">
+        <div class="container">
+            <h2 class="section-title">项目概述</h2>
+            <div class="content-card">
+                <h3>摘要</h3>
+                <p>本研究以深圳市龙岗区为研究对象，基于ArcGIS平台，结合多源地理空间数据，开展滑坡地质灾害易发性评价。通过系统分析高程、坡度、地形起伏度、岩组类型、断裂构造距离、水系距离、植被覆盖、道路网络、公共交通密度及年均降雨量等10项孕灾因子，揭示各因子对滑坡发育的影响机制。运用层次分析法（AHP）确定各因子权重，构建滑坡敏感性评价模型，并通过空间叠加分析生成龙岗区滑坡敏感性分区图。结果表明，滑坡高敏感区主要分布在中高丘陵陡坡带、断裂构造影响区、水系邻近区域及人类工程活动密集区，其中道路与公共交通建设等人为扰动是主要诱发因素。研究成果可为龙岗区地质灾害风险防控、国土空间规划与工程选址提供科学依据。</p>
+                
+                <h3>关键词</h3>
+                <div class="keywords">
+                    <span class="keyword-tag">滑坡敏感性</span>
+                    <span class="keyword-tag">层次分析法</span>
+                    <span class="keyword-tag">空间分析</span>
+                    <span class="keyword-tag">龙岗区</span>
+                    <span class="keyword-tag">ArcGIS</span>
+                </div>
+
+                <h3>研究对象</h3>
+                <h4>研究区分析</h4>
+                <p>研究区地处深圳市东北部，总体地势东南高、西北低，地貌呈东西向带状展布：东部多低山丘陵，西北部为低谷、台地及河谷平原，东南部大亚湾与大鹏湾沿岸属山地海岸，局部陡崖临海。境内沟谷发育、水系纵横，地表切割程度中等，海拔高程 - 6 m～867.4 m，最高点位于东南部大鹏半岛七娘山主峰，最低点为沿海近岸浅滩区域。</p>
+                <p>研究区出露地层主要有下古生界变质岩系（云母片岩、石英岩等）、泥盆系砂页岩、石炭系碳酸盐岩、侏罗系火山碎屑岩及新生界第四系松散沉积层（泥、砂、砾石等），局部地段零星分布白垩系、第三系陆相碎屑岩。</p>
+                <p>本文主要研究区内的崩塌滑坡及岩溶塌陷地质灾害易发性。研究区现状发育崩塌、滑坡等斜坡类灾害隐患点多分布于横岗、宝龙、坪地等街道低山丘陵区，以小型推移式土质滑坡（滑体厚度多小于 8 m）、滑移 / 倾倒式崩塌为主，高发于第四系坡残积层与侏罗系、石炭系岩质斜坡区域，斜坡高差多在 8 m～40 m 范围内；岩溶塌陷风险集中于荷坳、龙岗中心区等石炭系灰岩分布带，汛期强降雨及人类工程活动为主要激发因素。</p>
+                
+                <div class="factor-image">
+                    <img src="图/龙岗区地图.png" alt="龙岗区地图">
+                    <p class="image-caption">龙岗区地图</p>
+                </div>
+                
+                <h4>数据源</h4>
+                <p>地形地貌数据来源包括中国科学院地理科学与资源研究所、中国地质调查局、中国地震局地震活动断层探察数据中心、国家基础地理信息中心、国家水利数据中心、NASA Earth Observation Data、OpenStreetMap (OSM)、中国气象数据网等官方网站。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 孕灾因子分析 -->
+    <section id="factors" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">孕灾因子对滑坡地质灾害的影响</h2>
+
+            <!-- 地形地貌因子 -->
+            <div class="factor-group">
+                <h3 class="factor-group-title">地形地貌因子</h3>
+
+                <!-- 高程 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>高程</h4>
+                        <p>区内高程范围在0-860米之间，呈现自西南向东北递增的趋势。西南部以低海拔平原台地为主，东北部则为高丘陵与低山地形。滑坡点在高程梯度上均有分布，但在148-450米的中高丘陵区间相对集中，暗示该高程段可能因地形转折与岩土体条件而具有特殊的孕灾环境。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/龙岗高程.png" alt="龙岗高程">
+                        <p class="image-caption">龙岗高程</p>
+                    </div>
+                </div>
+
+                <!-- 坡度 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>坡度</h4>
+                        <p>坡度范围从近水平（0°）至极陡（85.66°）。滑坡点主要分布在坡度6.3°至45.2°的范围内，尤其集中在11.8°至36.0°的陡坡区域。这符合"坡度越大，重力势能转化越充分，滑坡失稳风险越高"的基本力学规律，表明坡度是控制滑坡空间分布的关键静态地形因子。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/坡度.png" alt="龙岗坡度">
+                        <p class="image-caption">龙岗坡度</p>
+                    </div>
+                </div>
+
+                <!-- 地形起伏度 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>地形起伏度</h4>
+                        <p>将地表起伏程度量化为10个等级（1-10）。结果显示，滑坡点显著集中于起伏度等级较高的区域（等级6-10）。高起伏度区域通常对应着沟谷深切、坡体临空面良好的地貌，为滑坡的启动和运移提供了有利的地形势能条件。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/龙岗地形起伏等级.png" alt="龙岗地形起伏等级">
+                        <p class="image-caption">龙岗地形起伏等级</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 地质与构造因子 -->
+            <div class="factor-group">
+                <h3 class="factor-group-title">地质与构造因子</h3>
+
+                <!-- 岩组类型 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>岩组类型</h4>
+                        <p>区内出露岩性多样，主要包括侏罗纪、白垩纪的花岗岩类（如二长花岗岩、黑云母花岗岩）以及部分沉积岩组（如丹霞组、桥源组）。滑坡点在不同岩组中均有出现，但在某些特定岩组分布相对密集。这提示岩性的差异，包括风化特性、强度以及结构面发育程度等都可能对斜坡稳定性具有基础性控制作用，需进一步分析软弱岩层或强风化带的分布。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/岩组.png" alt="龙岗岩组">
+                        <p class="image-caption">龙岗岩组</p>
+                    </div>
+                </div>
+
+                <!-- 断裂带距离 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>断裂带距离</h4>
+                        <p>通过构建断裂带的多环缓冲区（200, 400, 600, 1000, 1500, 2000米）进行分析。滑坡点显示出在距离断裂带较近的缓冲区（特别是400米范围内）分布更为集中的趋势。断裂带及其影响区通常岩体破碎、节理裂隙发育，不仅是构造薄弱带，也常常是地下水活跃的通道，显著降低了斜坡体的整体稳定性。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/断裂.png" alt="龙岗断裂构造">
+                        <p class="image-caption">龙岗断裂构造</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 水文与植被因子 -->
+            <div class="factor-group">
+                <h3 class="factor-group-title">水文与植被因子</h3>
+
+                <!-- 水系距离 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>水系距离</h4>
+                        <p>对包括龙岗河、坪山河、淡水河等的水系及水库进行距离重分类分析。滑坡点在水系周边呈现一定的聚集性。水体的浸润作用会软化岩土体，抬高地下水位，产生动水压力，是诱发滑坡的重要外动力因素。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/水系.png" alt="龙岗水系">
+                        <p class="image-caption">龙岗水系</p>
+                    </div>
+                </div>
+
+                <!-- 植被覆盖度 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>植被覆盖度</h4>
+                        <p>使用地表植被覆盖值表征，值越高通常代表植被越茂密。滑坡点在中等至较低植被覆盖区间（约3792-6428）出现频率较高。植被通过根系加筋和蒸腾作用有利于边坡固持，低覆盖区则可能反映了人类扰动强烈或土壤贫瘠，导致水土保持能力下降，抗滑能力减弱。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/植被覆盖.png" alt="龙岗地表植被覆盖">
+                        <p class="image-caption">龙岗地表植被覆盖</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 人类活动因子 -->
+            <div class="factor-group">
+                <h3 class="factor-group-title">人类活动因子</h3>
+
+                <!-- 道路网络 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>道路网络</h4>
+                        <p>将路网按等级重分类并分析其影响。滑坡点密集分布在路网密度高或距离道路较近的区域。道路工程建设中的边坡开挖、加载填方等改变了原始地形和应力场，破坏了斜坡的自然平衡，是引发工程滑坡的主要人为诱因。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/龙岗路网.png" alt="龙岗路网">
+                        <p class="image-caption">龙岗路网</p>
+                    </div>
+                </div>
+
+                <!-- 公共交通密度 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>公共交通密度</h4>
+                        <p>通过核密度分析模拟公交站点与地铁站点的空间聚集程度（值1-10，越高越密集）。滑坡点在高密度公共交通服务区（核密度等级6-10）外围及邻近区域有显著分布。这些区域城市化程度高，工程建设活动频繁，且人口资产密集，加剧了孕灾环境和承灾体的暴露度。</p>
+                    </div>
+                    <div class="factor-images">
+                        <div class="factor-image">
+                            <img src="图/地铁核密度分析.png" alt="龙岗地铁站核密度分析">
+                            <p class="image-caption">龙岗地铁站核密度分析</p>
+                        </div>
+                        <div class="factor-image">
+                            <img src="图/龙岗公交.png" alt="龙岗公交站核密度分析">
+                            <p class="image-caption">龙岗公交站核密度分析</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 气象因子 -->
+            <div class="factor-group">
+                <h3 class="factor-group-title">气象因子</h3>
+
+                <!-- 降雨量 -->
+                <div class="factor-item">
+                    <div class="factor-content">
+                        <h4>降雨量</h4>
+                        <p>区内年均降雨量在1990-2167毫米之间，空间分布存在差异。滑坡点的分布与降雨量梯度未呈现简单的线性关系，但在多个降雨量级区间均有分布。这提示降雨作为触发因素，其作用可能与下垫面条件（如前述地形、岩性、植被）相结合，在特定阈值上引发失稳。连续的强降雨是滑坡最普遍、最活跃的动态诱发因子。</p>
+                    </div>
+                    <div class="factor-image">
+                        <img src="图/降雨量.png" alt="龙岗降雨量">
+                        <p class="image-caption">龙岗降雨量</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 层次分析法分析 -->
+    <section id="analysis" class="section">
+        <div class="container">
+            <h2 class="section-title">层次分析法分析</h2>
+            
+            <div class="content-card">
+                <h3>评价因子体系构建</h3>
+                <p>在前期空间分析基础上，结合龙岗区滑坡发育特征与数据可获性，选取以下10个关键致灾因子构建评价体系：</p>
+                <ul class="factor-list">
+                    <li><strong>道路距离：</strong>反映人类工程活动对边坡稳定性的直接扰动。</li>
+                    <li><strong>植被指数（EVI）：</strong>表征地表植被覆盖与水土保持能力。</li>
+                    <li><strong>地铁站点距离：</strong>反映城市轨道交通建设与运营对地下及地表稳定性的影响。</li>
+                    <li><strong>公交站点距离：</strong>指示区域人类活动强度与地面荷载分布。</li>
+                    <li><strong>高程：</strong>控制地形势能与地表过程的基础地形因子。</li>
+                    <li><strong>地形起伏度：</strong>反映地表切割程度与斜坡临空条件。</li>
+                    <li><strong>年均降雨量：</strong>作为主要的滑坡触发水文气象因子。</li>
+                    <li><strong>坡度：</strong>直接关联坡体应力分布与失稳潜力。</li>
+                    <li><strong>坡向：</strong>影响日照、降雨入渗与植被分布，间接作用于斜坡稳定性。</li>
+                    <li><strong>水系距离：</strong>反映地表水与地下水对坡脚的侵蚀与浸润作用。</li>
+                </ul>
+
+                <h3>指标权重</h3>
+                <p>为量化各致灾因子对龙岗区滑坡发育的相对重要性，本研究采用层次分析法（Analytic Hierarchy Process, AHP）进行系统分析。AHP 可将专家经验与判断转化为定量权重，适用于多因子、多准则的复杂决策问题，已广泛应用于地质灾害敏感性评价中。</p>
+                <p>使用层次分析法对路网距离、EVI指数、地铁距离、公交口距离、高程、地形起伏、年降雨量、坡度、坡向、水系距离依次设为指标1-10。由组内成员进行打分，获得三个专家判断矩阵，对获得的数据进行层次分析法处理，获得每个指标应该占的权重。</p>
+
+                <h3>权重计算与一致性检验</h3>
+                <p>根据打分表建立10×10判断矩阵后，进行权重计算。最终权重向量计算结果为：</p>
+                
+                <div class="weight-table-container">
+                    <table class="weight-table">
+                        <thead>
+                            <tr>
+                                <th>指标</th>
+                                <th>方根法原始权重</th>
+                                <th>归一化权重</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>道路距离</td><td>0.948621</td><td>0.087903</td></tr>
+                            <tr><td>EVI</td><td>1.43784</td><td>0.133236</td></tr>
+                            <tr><td>地铁距离</td><td>1.727025</td><td>0.160033</td></tr>
+                            <tr><td>公交距离</td><td>1.892748</td><td>0.17539</td></tr>
+                            <tr><td>水系距离</td><td>0.948621</td><td>0.087903</td></tr>
+                            <tr><td>坡度</td><td>0.661542</td><td>0.061301</td></tr>
+                            <tr><td>高程</td><td>0.948621</td><td>0.087903</td></tr>
+                            <tr><td>地形起伏度</td><td>0.639007</td><td>0.059213</td></tr>
+                            <tr><td>坡向</td><td>0.639007</td><td>0.059213</td></tr>
+                            <tr><td>年均降雨量</td><td>0.948621</td><td>0.087903</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>在arcgis中使用权重分析法，权重结果表明：</p>
+                <ul>
+                    <li>道路距离、公交以及地铁站点设置距离等是影响龙岗区滑坡敏感性的最主要因子。这凸显了人类工程活动（尤其是交通建设）与地形地貌条件在龙岗区滑坡发育中的主导作用。</li>
+                    <li>年均降雨量作为关键触发因素，权重居前，符合该区域降雨充沛的气候背景。</li>
+                    <li>植被指数、坡向、水系距离等因子权重相对较低，说明在龙岗区特定环境下，其影响程度次于直接的地形改造与工程扰动，但仍为不可忽略的辅助性致灾条件。</li>
+                </ul>
+
+                <h3>敏感性分级与制图</h3>
+                <p>在GIS平台中，将各因子的重分类图层（已赋予对应等级的信息量值）与其权重相乘，得到加权信息量图层。随后，使用栅格计算器工具对所有加权图层进行叠加求和，生成龙岗区滑坡敏感性分布图。</p>
+                <p>分级方法：采用自然间断点法（Jenks） 对连续的敏感性指数进行分级。该方法能最大化组间差异并最小化组内差异，使分类结果能客观反映数据本身的自然分布结构。将全区滑坡敏感性划分为五个等级：极低敏感区、低敏感区、中敏感区、高敏感区、极高敏感区。生成最终的《龙岗区滑坡敏感性风险等级图》。</p>
+                
+                <div class="factor-image">
+                    <img src="图/敏感性分析图.png" alt="龙岗区滑坡敏感性空间分布">
+                    <p class="image-caption">龙岗区滑坡敏感性空间分布</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 网络分析 -->
+    <section id="network" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">网络分析</h2>
+            <div class="content-card">
+                <p>根据龙岗区路网，建立网络分析模块用于解决基于交通网络（道路）的资源分配、路径规划与可达性分析等空间优化问题。</p>
+                
+                <h3>构建交通网络数据集</h3>
+                <p>基于龙岗区真实道路数据，构建包含通行规则（单行、限速等）的网络模型。</p>
+                
+                <h3>确定设施点</h3>
+                <p>根据风险区分析结果，建立8个应急救援指挥中心，建立服务区。</p>
+                
+                <h3>识别需求点</h3>
+                <p>将历史及预测的地质灾害隐患点以及居民聚集区设置为"需求点"。</p>
+
+                <h3>成果一：应急响应能力时空可达性图谱</h3>
+                <p><strong>分析：</strong>对8个指挥中心分别进行30、60、90、120分钟服务区分析，生成 32个可达性多边形。</p>
+                <p><strong>发现：</strong>清晰揭示了在暴雨、交通拥堵等不同情景下，各中心的实际有效救援范围。</p>
+                <div class="factor-image">
+                    <img src="图/网络分析区域可达性.png" alt="网络分析区域可达性">
+                    <p class="image-caption">网络分析区域可达性</p>
+                </div>
+
+                <h3>成果二：居民点疏散与救援OD成本矩阵</h3>
+                <p><strong>分析：</strong>计算所有指挥中心到预设居民聚集点的通行成本（时间），形成矩阵表格。</p>
+                <p><strong>应用：</strong>灾情发生时，可根据矩阵快速锁定距离最近、可用的指挥中心，并获取理论最优路径，为人员疏散和救援力量投送提供关键决策支持。</p>
+
+                <h3>成果三：高风险点优先巡查路径规划</h3>
+                <p><strong>重点巡查高风险点位（2）：</strong>从最近指挥中心巡查，重点巡查高风险区域。</p>
+                <p><strong>VRP求解：</strong>输入点序、车辆容量等约束，系统自动计算总耗时最短或总路径最优的巡查回路。</p>
+                <p><strong>重点巡查（特殊条件）：</strong>在点2处进行重点巡查，停留30分钟。</p>
+                <div class="factor-image">
+                    <img src="图/网络分析龙岗路网.png" alt="网络分析龙岗路网">
+                    <p class="image-caption">网络分析龙岗路网</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 综合分析结论 -->
+    <section id="conclusion" class="section">
+        <div class="container">
+            <h2 class="section-title">综合分析结论</h2>
+            <div class="content-card">
+                <p>龙岗区的滑坡分布是地形地貌、地质构造、水文条件、植被覆盖及强烈人类活动共同作用的结果。滑坡点并非均匀分布，而是在中高丘陵陡坡区、断裂构造影响带、水系邻近区域、道路工程沿线以及城市化快速发展区表现出明显的空间集聚性。各致灾因子并非独立作用，而是通过复杂的耦合机制影响斜坡稳定性。例如，位于断裂带附近、坡度较陡、且受道路开挖扰动的高程过渡地带，在持续强降雨条件下，发生滑坡的风险将显著增高。</p>
+                <p>本研究系统揭示了龙岗区滑坡孕灾环境的空间异质性，为后续采用信息量模型、层次分析法等定量方法进行滑坡敏感性区划与风险评价奠定了坚实的空间分析基础。基于此的敏感性分区成果，可为龙岗区的国土空间用途管制、重大工程选址、地质灾害风险防控区划提供科学的数据支撑与决策依据。</p>
+                
+                <div class="factor-image">
+                    <img src="图/风险等级.png" alt="龙岗区滑坡敏感性风险等级图">
+                    <p class="image-caption">龙岗区滑坡敏感性风险等级图</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 龙岗区滑坡检测项目 | 人文社科学部 资源与环境</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
