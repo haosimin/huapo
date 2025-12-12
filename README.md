@@ -21,7 +21,7 @@
 ├── script.js           # 交互脚本
 ├── README.md          # 项目说明
 ├── .gitignore         # Git忽略文件
-└── 图/                # 图片资源文件夹
+└── images/             # 图片资源文件夹（注意：GitHub Pages需要英文文件夹名）
     ├── 龙岗区地图.png
     ├── 龙岗高程.png
     ├── 坡度.png

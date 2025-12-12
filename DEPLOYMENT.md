@@ -6,12 +6,12 @@
 - [x] `index.html` - 主页面文件
 - [x] `styles.css` - 样式文件
 - [x] `script.js` - 脚本文件
-- [x] `图/` - 图片资源文件夹（包含16张图片）
+- [x] `images/` - 图片资源文件夹（包含16张图片，注意：必须使用英文文件夹名）
 - [x] `README.md` - 项目说明文档
 - [x] `.gitignore` - Git忽略文件
 
 ### 2. 路径检查
-- [x] 所有图片路径使用相对路径：`图/文件名.png`
+- [x] 所有图片路径使用相对路径：`images/文件名.png`（必须使用英文文件夹名）
 - [x] CSS文件使用相对路径：`styles.css`
 - [x] JS文件使用相对路径：`script.js`
 - [x] 所有路径都是小写或中文，无特殊字符问题
@@ -50,10 +50,15 @@
 5. **不要**勾选 "Initialize this repository with a README"
 6. 点击 "Create repository"
 
-### 步骤 2: 上传文件
+### 步骤 2: 重命名图片文件夹（重要！）
+**⚠️ 在上传前必须先重命名文件夹：**
+1. 将文件夹 `图` 重命名为 `images`
+2. 这是必须的，因为 GitHub Pages 对中文文件夹路径支持不稳定
+
+### 步骤 3: 上传文件
 **方法A: 使用 GitHub 网页界面**
 1. 在仓库页面点击 "uploading an existing file"
-2. 将所有文件拖拽上传（包括 `图` 文件夹）
+2. 将所有文件拖拽上传（包括重命名后的 `images` 文件夹）
 3. 在底部填写提交信息："Initial commit: 龙岗区滑坡检测项目"
 4. 点击 "Commit changes"
 
@@ -68,7 +73,7 @@ git remote add origin https://github.com/你的用户名/仓库名.git
 git push -u origin main
 ```
 
-### 步骤 3: 启用 GitHub Pages
+### 步骤 4: 启用 GitHub Pages
 1. 进入仓库的 Settings（设置）
 2. 在左侧菜单找到 "Pages"
 3. 在 "Source" 部分：
@@ -78,7 +83,7 @@ git push -u origin main
 5. 等待1-2分钟，GitHub 会显示你的网站地址：
    `https://[你的用户名].github.io/[仓库名]/`
 
-### 步骤 4: 访问网站
+### 步骤 5: 访问网站
 - 网站地址会在 Settings → Pages 页面显示
 - 首次部署可能需要几分钟时间
 - 如果看到 404，等待几分钟后刷新
@@ -93,9 +98,11 @@ git push -u origin main
 ## 🔧 常见问题
 
 ### 问题1: 图片不显示
-- 检查图片路径是否正确（相对路径 `图/文件名.png`）
-- 确认图片文件已上传到 GitHub
+- **最重要：检查文件夹名是否为 `images`（不是 `图`）**
+- 检查图片路径是否正确（相对路径 `images/文件名.png`）
+- 确认图片文件已上传到 GitHub 的 `images` 文件夹
 - 检查文件名是否完全匹配（包括大小写）
+- 如果文件夹名还是 `图`，需要重命名为 `images` 并重新上传
 
 ### 问题2: 样式不生效
 - 检查 CSS 文件路径是否正确
